@@ -44,15 +44,16 @@ class TradeTrackerClient {
      * @param DateTime|null $endDate   End date, optional (defaults to today)
      * @return array Transaction objects. Each part of a transaction is returned as a separate Transaction.
      */
-    public function getTransactions(DateTime $startDate, DateTime $endDate = null) {
+    public function getTransactions(DateTime $startDate, DateTime $endDate = null, array $sites = []) {
         if ($endDate == null) {
             $endDate = new DateTime();
         }
 
         $client = $this->getSoapClient();
 
-        // Get site ID's:
-        $sites = $client->getAffiliateSites();
+        if (empty($sites)) {
+            $sites = $client->getAffiliateSites();
+        }
 
         $transactions = [];
 
