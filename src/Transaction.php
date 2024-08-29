@@ -86,6 +86,11 @@ class Transaction {
     public $transactionType;
 
     /**
+     * @var string
+     */
+    public $ip;
+
+    /**
      * Create a Transaction object from two JSON objects
      * @param $site      \stdClass Site data
      * @param $transData \stdClass Transaction data
@@ -103,6 +108,8 @@ class Transaction {
         $transaction->orderValue = doubleval($transData->orderAmount);
         $transaction->orderDescription = $transData->description;
         $transaction->reference = $transData->reference;
+
+        $transaction->ip = $transData->IP;
 
         $transaction->mediaId = $site->ID;
         $transaction->mediaName = $site->name;
